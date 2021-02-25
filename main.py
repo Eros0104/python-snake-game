@@ -82,14 +82,17 @@ while True:
     sc.write("score: {} High Score: {}".format(score, high_score), align="center", font=("ds-digital", 24, "normal"))
 
   if head.distance(food) < 20:
-    x = random.randint(-290, 290)
-    y = random.randint(-290, 290)
+    x = random.randint(-14, 14) * 20
+    y = random.randint(-14, 14) * 20
     food.goto(x,y)
 
     new_segment = turtle.Turtle()
     new_segment.speed(0)
     new_segment.shape("square")
-    new_segment.color("green")
+    if(len(segments) % 2):
+      new_segment.color("white")
+    else:
+      new_segment.color("green")
     new_segment.penup()
     segments.append(new_segment)
 
