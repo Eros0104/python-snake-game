@@ -3,6 +3,7 @@ import time
 import random
 from defaultObject import getObject
 from snake import getSnake
+from food import getFood
 
 delay = 0.1
 
@@ -17,7 +18,7 @@ wn.tracer(0)
 
 head = getSnake()
 
-food = getObject("square", "green", 0, 100) 
+food = getFood() 
 
 segments = []
 
@@ -100,7 +101,7 @@ while True:
     score += 10
 
     if score > high_score:
-      hight_score = score
+      high_score = score
     sc.clear()
     sc.write("score: {} High Score: {}".format(score, high_score), align="center", font=("ds-digital", 24, "normal"))
 
