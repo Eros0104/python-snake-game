@@ -1,9 +1,9 @@
 import turtle
 import time
-import random
 from defaultObject import getObject
 from snake import getSnake
-from food import getFood
+from food import getFood, getFoodCoordinate
+from score import writeScore, getScore
 
 delay = 0.1
 
@@ -22,14 +22,8 @@ food = getFood()
 
 segments = []
 
-sc = turtle.Turtle()
-sc.speed(0)
-sc.shape("square")
-sc.color("green")
-sc.penup()
-sc.hideturtle()
-sc.goto(0,260)
-sc.write("score: 0 High score: 0", align="center", font=("ds-digital", 24, "normal"))
+sc = getScore()
+sc.write(writeScore(), align="center", font=("ds-digital", 24, "normal"))
 
 def go_up():
   if head.direction != "down":
@@ -80,11 +74,11 @@ while True:
     delay = 0.1
 
     sc.clear()
-    sc.write("score: {} High Score: {}".format(score, high_score), align="center", font=("ds-digital", 24, "normal"))
+    sc.write(writeScore(score, high_score), align="center", font=("ds-digital", 24, "normal"))
 
   if head.distance(food) < 20:
-    x = random.randint(-14, 14) * 20
-    y = random.randint(-14, 14) * 20
+    x = getFoodCoordinate()
+    y = getFoodCoordinate()
     food.goto(x,y)
 
     new_segment = turtle.Turtle()
@@ -103,7 +97,7 @@ while True:
     if score > high_score:
       high_score = score
     sc.clear()
-    sc.write("score: {} High Score: {}".format(score, high_score), align="center", font=("ds-digital", 24, "normal"))
+    sc.write(writeScore(score, high_score), align="center", font=("ds-digital", 24, "normal"))
 
   for index in range(len(segments)-1,0,-1):
     x = segments[index-1].xcor()
@@ -130,6 +124,6 @@ while True:
       delay = 0.1
 
       sc.clear()
-      sc.write("score: {} High Score: {}".format(score, high_score), align="center", font=("ds-digital", 24, "normal"))
+      sc.write(writeScore(score, high_score), align="center", font=("ds-digital", 24, "normal"))
   time.sleep(delay)
 wn.mainloop()
